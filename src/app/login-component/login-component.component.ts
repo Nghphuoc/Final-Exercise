@@ -25,10 +25,9 @@ export class LoginComponentComponent {
   //console.log('Đăng nhập:', user);
     this.userService.loginUser(user).subscribe({
       next: (res: any) => {alert('Đăng nhập thành công:' + res.jwtToken);
-        localStorage.setItem('jwtToken', res.jwtToken);
+        sessionStorage.setItem('jwtToken', res.jwtToken);
         this.router.navigate(['/home']);
       }
-      
     });
   }
 }

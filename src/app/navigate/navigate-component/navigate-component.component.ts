@@ -10,7 +10,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class NavigateComponentComponent implements OnInit, OnDestroy {
   isMobileMenuOpen = false;
-  jwtToken = localStorage.getItem('jwtToken') || '';
+  jwtToken = sessionStorage.getItem('jwtToken') || '';
 
   constructor(private router: Router) {}
 
@@ -24,7 +24,7 @@ export class NavigateComponentComponent implements OnInit, OnDestroy {
   }
 
   syncToken = () => {
-    this.jwtToken = localStorage.getItem('jwtToken') || '';
+    this.jwtToken = sessionStorage.getItem('jwtToken') || '';
   };
 
   toggleMobileMenu() {
@@ -32,7 +32,7 @@ export class NavigateComponentComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    localStorage.removeItem('jwtToken');
+    sessionStorage.removeItem('jwtToken');
     this.syncToken(); // cập nhật token
     this.router.navigate(['/login']);
   }

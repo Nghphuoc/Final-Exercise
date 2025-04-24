@@ -6,8 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-user-detail',
   imports: [PhoneFormatPipe,RouterModule],
-  templateUrl: './user-detail.component.html',
-  styleUrl: './user-detail.component.css'
+  templateUrl: './user-detail.component.html'
 })
 export class UserDetailComponent implements OnInit{
 

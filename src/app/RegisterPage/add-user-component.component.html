@@ -1,15 +1,29 @@
-<div class="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-300 flex items-center justify-center p-4">
-  <div class="backdrop-blur-md bg-gray-500 shadow-xl rounded-2xl p-10 max-w-lg w-full space-y-8 text-white">
+<div
+  class="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-300 flex items-center justify-center p-4"
+>
+  <div
+    class="backdrop-blur-md bg-gray-500 shadow-xl rounded-2xl p-10 max-w-lg w-full space-y-8 text-white"
+  >
     <div class="text-center">
-      <h2 class="text-4xl font-semibold text-white mb-6 animate__animated animate__fadeInUp">Register</h2>
+      <h2
+        class="text-4xl font-semibold text-white mb-6 animate__animated animate__fadeInUp"
+      >
+        Register
+      </h2>
     </div>
 
     <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-6">
       <!-- Tên người dùng -->
       <div>
-        <label class="block mb-2 text-lg font-medium text-white">User Name</label>
-        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
-          <span class="material-icons text-white opacity-70 mr-3">username</span>
+        <label class="block mb-2 text-lg font-medium text-white"
+          >User Name</label
+        >
+        <div
+          class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300"
+        >
+          <span class="material-icons text-white opacity-70 mr-3"
+            >username</span
+          >
           <input
             type="text"
             name="username"
@@ -24,9 +38,15 @@
 
       <!-- Họ và tên -->
       <div>
-        <label class="block mb-2 text-lg font-medium text-white">Last Name</label>
-        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
-          <span class="material-icons text-white opacity-70 mr-3">lastname</span>
+        <label class="block mb-2 text-lg font-medium text-white"
+          >Last Name</label
+        >
+        <div
+          class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300"
+        >
+          <span class="material-icons text-white opacity-70 mr-3"
+            >lastname</span
+          >
           <input
             type="text"
             name="lastname"
@@ -41,9 +61,15 @@
 
       <!-- Mật khẩu -->
       <div>
-        <label class="block mb-2 text-lg font-medium text-white">Password</label>
-        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
-          <span class="material-icons text-white opacity-70 mr-3">password</span>
+        <label class="block mb-2 text-lg font-medium text-white"
+          >Password</label
+        >
+        <div
+          class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300"
+        >
+          <span class="material-icons text-white opacity-70 mr-3"
+            >password</span
+          >
           <input
             type="password"
             name="password"
@@ -59,7 +85,9 @@
       <!-- Email -->
       <div>
         <label class="block mb-2 text-lg font-medium text-white">Email</label>
-        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
+        <div
+          class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300"
+        >
           <span class="material-icons text-white opacity-70 mr-3">email</span>
           <input
             type="email"
@@ -75,8 +103,12 @@
 
       <!-- Số điện thoại -->
       <div>
-        <label class="block mb-2 text-lg font-medium text-white">Phone Numer</label>
-        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
+        <label class="block mb-2 text-lg font-medium text-white"
+          >Phone Numer</label
+        >
+        <div
+          class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300"
+        >
           <span class="material-icons text-white opacity-70 mr-3">phone</span>
           <input
             type="tel"
@@ -95,6 +127,7 @@
         <button
           type="submit"
           class="w-full py-3 px-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+           [disabled]="!userForm.form.valid"
         >
           Register
         </button>

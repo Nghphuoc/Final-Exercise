@@ -6,19 +6,19 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user-component',
-  imports: [CommonModule,PhoneFormatPipe,RouterModule],
+  imports: [CommonModule, PhoneFormatPipe, RouterModule],
   templateUrl: './user-component.component.html',
 })
 export class UserComponentComponent implements OnInit {
 
   dataUser: any[] = [];
 
-  constructor(private userService : UserService, private router : Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAll();
   }
-  getAll(){
+  getAll() {
     this.userService.getAllUsers().subscribe({
       next: (res: any[]) => {
         console.log('Lấy danh sách user thành công:', res);
@@ -30,7 +30,7 @@ export class UserComponentComponent implements OnInit {
     });
   }
 
-  onClickDetailUser(username : string){
+  onClickDetailUser(username: string) {
     // this.userService.getUserById(username).subscribe({
     // })
     console.log("name: ", username);

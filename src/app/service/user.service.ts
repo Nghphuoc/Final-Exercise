@@ -29,14 +29,14 @@ export class UserService {
   }
 
   createUser(user: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}/api/auth/public/signup`, user,{
-    responseType: 'text' as 'json'
-  }).pipe(
-      catchError(this.handleError) 
+    return this.httpClient.post<any>(`${this.baseUrl}/api/auth/public/signup`, user, {
+      responseType: 'text' as 'json'
+    }).pipe(
+      catchError(this.handleError)
     );
   }
 
-  updateUser(username: string, user : any): Observable<any> {
+  updateUser(username: string, user: any): Observable<any> {
     return this.httpClient.put<any>(`${this.baseUrl}/api/user/${username}`, user).pipe(
       catchError(this.handleError)
     );
@@ -48,8 +48,8 @@ export class UserService {
     );
   }
 
-  loginUser(user : any): Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}/api/auth/public/login`,user).pipe(
+  loginUser(user: any): Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}/api/auth/public/login`, user).pipe(
       catchError(this.handleError) // Xử lý lỗi
     );
   }

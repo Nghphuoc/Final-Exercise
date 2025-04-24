@@ -16,7 +16,7 @@ export class UserService {
       // map((response: any) => {
       //   return response;
       // }),
-      map(data => data.filter(data => data.role.roleName === 'ROLE_USER')),
+      map(data => data.filter(data => data.role?.roleName === 'ROLE_USER')),
       catchError(this.handleError)
     );
   }
@@ -28,7 +28,9 @@ export class UserService {
   }
 
   createUser(user: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}/api/user`, user).pipe(
+    return this.httpClient.post<any>(`${this.baseUrl}/api/auth/public/signup`, user,{
+    responseType: 'text' as 'json'
+  }).pipe(
       catchError(this.handleError) 
     );
   }

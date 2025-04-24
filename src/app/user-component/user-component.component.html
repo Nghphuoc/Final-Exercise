@@ -18,9 +18,9 @@
         <tr *ngFor="let user of dataUser" class="hover:bg-gray-50 transition">
           <td class="py-3 px-4">{{ user.username }}</td>
           <!-- <td class="py-3 px-4">{{ user.password }}</td> -->
-          <td class="py-3 px-4">{{ user.lastname }}</td>
-          <td class="py-3 px-4">{{ user.email }}</td>
-          <td class="py-3 px-4">{{ user.phoneNumber }}</td>
+          <td class="py-3 px-4">{{ user?.lastname }}</td>
+          <td class="py-3 px-4">{{ user?.email }}</td>
+          <td class="py-3 px-4">{{ user?.phoneNumber }}</td>
           <td class="py-3 px-4">
             <span [ngClass]="{
               'text-green-600 font-bold': user.role?.roleName === 'ROLE_ADMIN',

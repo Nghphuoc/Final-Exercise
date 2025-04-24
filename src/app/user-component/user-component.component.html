@@ -23,11 +23,11 @@
           <td class="py-3 px-4">{{ user.phoneNumber }}</td>
           <td class="py-3 px-4">
             <span [ngClass]="{
-              'text-green-600 font-bold': user.role.roleName === 'ROLE_ADMIN',
-              'text-blue-600': user.role.roleName === 'ROLE_USER'
+              'text-green-600 font-bold': user.role?.roleName === 'ROLE_ADMIN',
+              'text-blue-600': user.role?.roleName === 'ROLE_USER'
             }">
             
-              <div *ngIf="user.role.roleName === 'ROLE_ADMIN'; else notLoggedIn">Admin</div>
+              <div *ngIf="user.role?.roleName === 'ROLE_ADMIN'; else notLoggedIn">Admin</div>
               <ng-template #notLoggedIn>User</ng-template>
             </span>
           </td>

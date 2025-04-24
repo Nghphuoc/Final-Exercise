@@ -1,0 +1,27 @@
+<header class="bg-indigo-400 text-white p-4 shadow-md">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div class="flex items-center">
+      <img src="assets/logo.png" alt="Logo" class="h-8 w-8">
+      <span class="ml-2 text-xl font-semibold">MyApp</span>
+    </div>
+    <nav class="hidden md:flex space-x-6">
+      <a href="#" class="hover:text-indigo-200 transition">Home</a>
+      <a href="#" class="hover:text-indigo-200 transition">About</a>
+      <a href="#" class="hover:text-indigo-200 transition">Services</a>
+      <a href="#" class="hover:text-indigo-200 transition">Contact</a>
+    </nav>
+    <button class="md:hidden" (click)="toggleMobileMenu()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div *ngIf="isMobileMenuOpen" class="md:hidden flex flex-col items-center space-y-4 py-4 bg-indigo-700">
+    <a href="#" class="text-white hover:text-indigo-200 transition">Home</a>
+    <a href="#" class="text-white hover:text-indigo-200 transition">About</a>
+    <a href="#" class="text-white hover:text-indigo-200 transition">Services</a>
+    <a href="#" class="text-white hover:text-indigo-200 transition">Contact</a>
+  </div>
+</header>

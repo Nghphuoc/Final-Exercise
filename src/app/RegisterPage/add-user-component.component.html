@@ -1,72 +1,104 @@
-<!-- user-form.component.html -->
-
-<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-    <h2 class="text-2xl font-bold mb-4">Thêm thông tin người dùng</h2>
-
-    <!-- Họ tên -->
-    <div class="mb-4">
-      <label class="block text-gray-700 font-semibold mb-2" for="name">Username</label>
-      <input
-        type="text"
-        name="username"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        required
-        [(ngModel)]="username" 
-      />
+<div class="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-300 flex items-center justify-center p-4">
+  <div class="backdrop-blur-md bg-gray-500 shadow-xl rounded-2xl p-10 max-w-lg w-full space-y-8 text-white">
+    <div class="text-center">
+      <h2 class="text-4xl font-semibold text-white mb-6 animate__animated animate__fadeInUp">Register</h2>
     </div>
 
-    <div class="mb-4">
-      <label class="block text-gray-700 font-semibold mb-2" for="name">Lastname</label>
-      <input
-        type="text"
-        name="lastname"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        required
-        [(ngModel)]="lastname"
-      />
-    </div>
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-6">
+      <!-- Tên người dùng -->
+      <div>
+        <label class="block mb-2 text-lg font-medium text-white">User Name</label>
+        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
+          <span class="material-icons text-white opacity-70 mr-3">username</span>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="bg-transparent w-full outline-none text-white placeholder-white/70"
+            required
+            [(ngModel)]="username"
+            placeholder="Nhập tên người dùng"
+          />
+        </div>
+      </div>
 
-    <div class="mb-4">
-      <label class="block text-gray-700 font-semibold mb-2" for="email">Email</label>
-      <input
-        type="password"
-        name="password"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        required
-        [(ngModel)]="password"
-      />
-    </div>
+      <!-- Họ và tên -->
+      <div>
+        <label class="block mb-2 text-lg font-medium text-white">Last Name</label>
+        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
+          <span class="material-icons text-white opacity-70 mr-3">lastname</span>
+          <input
+            type="text"
+            name="lastname"
+            id="lastname"
+            class="bg-transparent w-full outline-none text-white placeholder-white/70"
+            required
+            [(ngModel)]="lastname"
+            placeholder="Nhập họ và tên"
+          />
+        </div>
+      </div>
 
-    <!-- Email -->
-    <div class="mb-4">
-      <label class="block text-gray-700 font-semibold mb-2" for="email">Email</label>
-      <input
-        type="email"
-        name="email"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        required
-        [(ngModel)]="email"
-      />
-    </div>
+      <!-- Mật khẩu -->
+      <div>
+        <label class="block mb-2 text-lg font-medium text-white">Password</label>
+        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
+          <span class="material-icons text-white opacity-70 mr-3">password</span>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="bg-transparent w-full outline-none text-white placeholder-white/70"
+            required
+            [(ngModel)]="password"
+            placeholder="Nhập mật khẩu"
+          />
+        </div>
+      </div>
 
-    <!-- Số điện thoại -->
-    <div class="mb-4">
-      <label class="block text-gray-700 font-semibold mb-2" for="phone">PhoneNumber</label>
-      <input
-        type="tel"
-        name="phone"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        required
-        [(ngModel)]="phone"
-      />
-    </div>
-    <!-- Nút Submit -->
-    <button
-      type="submit"
-      class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
-    >
-      Thêm người dùng
-    </button>
-  </form>
+      <!-- Email -->
+      <div>
+        <label class="block mb-2 text-lg font-medium text-white">Email</label>
+        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
+          <span class="material-icons text-white opacity-70 mr-3">email</span>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="bg-transparent w-full outline-none text-white placeholder-white/70"
+            required
+            [(ngModel)]="email"
+            placeholder="Nhập email của bạn"
+          />
+        </div>
+      </div>
+
+      <!-- Số điện thoại -->
+      <div>
+        <label class="block mb-2 text-lg font-medium text-white">Phone Numer</label>
+        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
+          <span class="material-icons text-white opacity-70 mr-3">phone</span>
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            class="bg-transparent w-full outline-none text-white placeholder-white/70"
+            required
+            [(ngModel)]="phone"
+            placeholder="Nhập số điện thoại"
+          />
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button
+          type="submit"
+          class="w-full py-3 px-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 
 <div class="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 flex items-center justify-center p-4">
-  <div class="backdrop-blur-md bg-white/20 shadow-2xl rounded-2xl p-8 max-w-md w-full space-y-6 text-white">
+  <div class="backdrop-blur-md bg-gray-600 shadow-2xl rounded-2xl p-8 max-w-md w-full space-y-6 text-white">
     <div class="text-center">
       <div class="text-4xl mb-2">🔐</div>
       <h2 class="text-2xl font-bold">Welcome Back!</h2>
@@ -11,7 +11,7 @@
       <div>
         <label class="block mb-1 text-sm font-medium">Email</label>
         <div class="flex items-center bg-white/10 rounded-lg px-3 py-2">
-          <span class="material-icons text-white opacity-70 mr-2">email</span>
+          <span class="material-icons text-white opacity-70 mr-2">username</span>
           <input [(ngModel)]="username" name="name" type="username" placeholder="you@example.com" class="bg-transparent w-full outline-none text-white placeholder-white/70" />
         </div>
       </div>
@@ -19,7 +19,7 @@
       <div>
         <label class="block mb-1 text-sm font-medium">Password</label>
         <div class="flex items-center bg-white/10 rounded-lg px-3 py-2">
-          <span class="material-icons text-white opacity-70 mr-2">lock</span>
+          <span class="material-icons text-white opacity-70 mr-2">pasword</span>
           <input [(ngModel)]="password" name="password" type="password" placeholder="••••••••" class="bg-transparent w-full outline-none text-white placeholder-white/70" />
         </div>
       </div>
@@ -31,7 +31,7 @@
 
     <p class="text-sm text-center opacity-90">
       Don't have an account?
-      <a href="#" class="underline text-white hover:text-indigo-200">Register</a>
+      <a routerLink='/register' class="underline text-white hover:text-indigo-200">Register</a>
     </p>
   </div>
 </div>

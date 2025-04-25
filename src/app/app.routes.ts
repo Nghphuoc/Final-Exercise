@@ -10,7 +10,8 @@ export const routes: Routes = [
          path: 'login', component: LoginComponentComponent 
     },
     {
-        path: 'home', component: UserComponentComponent, canActivate: [AuthGuard] // Chỉ cho phép truy cập nếu đã đăng nhập
+        path: 'home', loadComponent: () => import('./user-component/user-component.component')
+        .then(m => m.UserComponentComponent), canActivate: [AuthGuard] // Chỉ cho phép truy cập nếu đã đăng nhập
     },
     {
         path: 'register', component: AddUserComponentComponent

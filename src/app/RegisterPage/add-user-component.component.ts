@@ -13,12 +13,11 @@ export class AddUserComponentComponent {
   username = '';
   lastname = '';
   email = '';
-  password = '123456';
+  password = '';
   phone = '';
   openAddUser = false;
 
-  @Input({required : true}) check!: boolean;
-  @Output() close = new EventEmitter<boolean>();
+  check!: boolean;
 
   constructor(private userService : UserService) { }
 
@@ -34,13 +33,8 @@ export class AddUserComponentComponent {
     this.userService.createUser(user).subscribe({
     next: (res) => {
       console.log('Tạo user thành công:', res);
-      this.onClickClose(); // nếu muốn đóng form sau khi thêm
     }
-    
   });
-  }
-
-  onClickClose(){
-    this.close.emit();
+  
   }
 }

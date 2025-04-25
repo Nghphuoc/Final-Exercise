@@ -1,6 +1,6 @@
 <!-- user-form.component.html -->
 
-<div *ngIf="check" class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
   <form (ngSubmit)="onSubmit()" #userForm="ngForm">
     <h2 class="text-2xl font-bold mb-4">Thêm thông tin người dùng</h2>
 
@@ -61,11 +61,10 @@
         [(ngModel)]="phone"
       />
     </div>
-
     <!-- Nút Submit -->
     <button
       type="submit"
-      class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition" (click)="onClickClose()"
+      class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
     >
       Thêm người dùng
     </button>

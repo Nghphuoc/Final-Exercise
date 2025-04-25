@@ -1,27 +1,133 @@
-<header class="bg-indigo-400 text-white p-4 shadow-md">
-  <div class="max-w-7xl mx-auto flex justify-between items-center">
-    <div class="flex items-center">
-      <img src="assets/logo.png" alt="Logo" class="h-8 w-8">
-      <span class="ml-2 text-xl font-semibold">MyApp</span>
+<header class="bg-white text-gray-800 shadow-md fixed top-0 left-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <!-- Logo -->
+    <div class="flex items-center space-x-2 text-indigo-600 font-bold text-xl">
+      🍃 <span>MyApp</span>
     </div>
-    <nav class="hidden md:flex space-x-6">
-      <a href="#" class="hover:text-indigo-200 transition">Home</a>
-      <a href="#" class="hover:text-indigo-200 transition">About</a>
-      <a href="#" class="hover:text-indigo-200 transition">Services</a>
-      <a href="#" class="hover:text-indigo-200 transition">Contact</a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center space-x-6">
+      <a
+        routerLink="/home"
+        routerLinkActive="text-indigo-600 font-semibold"
+        class="transition hover:text-indigo-600"
+        >Home</a
+      >
+      <a
+        routerLink="/about"
+        routerLinkActive="text-indigo-600 font-semibold"
+        class="transition hover:text-indigo-600"
+        >About</a
+      >
+      <a
+        routerLink="/services"
+        routerLinkActive="text-indigo-600 font-semibold"
+        class="transition hover:text-indigo-600"
+        >Services</a
+      >
+      <a
+        routerLink="/userDetail"
+        routerLinkActive="text-indigo-600 font-semibold"
+        class="transition hover:text-indigo-600"
+        >Contact</a
+      >
+
+      <!-- If user is NOT logged in -->
+      <ng-container *ngIf="!jwtToken; else loggedIn">
+        <button
+          class="flex items-center px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition"
+          routerLink="/login"
+        >
+          <span class="material-icons">login</span>
+        </button>
+        <button
+          class="flex items-center px-4 py-2 bg-gray-200 text-indigo-600 rounded-lg hover:bg-gray-300 transition"
+          routerLink="/register"
+        >
+          <span class="material-icons"></span> Register
+        </button>
+      </ng-container>
+      <ng-template #loggedIn>
+        <button
+          class="px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 transition"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </ng-template>
     </nav>
-    <button class="md:hidden" (click)="toggleMobileMenu()">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+
+    <!-- Hamburger Icon -->
+    <button class="md:hidden focus:outline-none" (click)="toggleMobileMenu()">
+      <svg
+        class="w-6 h-6 text-indigo-600"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
       </svg>
     </button>
   </div>
 
   <!-- Mobile Menu -->
-  <div *ngIf="isMobileMenuOpen" class="md:hidden flex flex-col items-center space-y-4 py-4 bg-indigo-700">
-    <a href="#" class="text-white hover:text-indigo-200 transition">Home</a>
-    <a href="#" class="text-white hover:text-indigo-200 transition">About</a>
-    <a href="#" class="text-white hover:text-indigo-200 transition">Services</a>
-    <a href="#" class="text-white hover:text-indigo-200 transition">Contact</a>
+  <div
+    *ngIf="isMobileMenuOpen"
+    class="md:hidden flex flex-col items-center space-y-4 py-6 bg-indigo-100 text-center transition-all duration-300"
+  >
+    <a
+      routerLink="/home"
+      routerLinkActive="font-bold text-indigo-600"
+      class="text-gray-800 hover:text-indigo-600"
+      >Home</a
+    >
+    <a
+      routerLink="/about"
+      routerLinkActive="font-bold text-indigo-600"
+      class="text-gray-800 hover:text-indigo-600"
+      >About</a
+    >
+    <a
+      routerLink="/services"
+      routerLinkActive="font-bold text-indigo-600"
+      class="text-gray-800 hover:text-indigo-600"
+      >Services</a
+    >
+    <a
+      routerLink="/contact"
+      routerLinkActive="font-bold text-indigo-600"
+      class="text-gray-800 hover:text-indigo-600"
+      >Contact</a
+    >
+
+    <!-- If user is NOT logged in -->
+    <ng-container *ngIf="!jwtToken; else loggedIn">
+      <button
+        class="w-3/4 py-2 rounded-xl bg-indigo-500 text-white hover:bg-indigo-600 transition"
+        routerLink="/login"
+      >
+        Login
+      </button>
+      <button
+        class="w-3/4 py-2 rounded-xl bg-gray-200 text-indigo-600 hover:bg-gray-300 transition"
+        routerLink="/register"
+      >
+        Register
+      </button>
+    </ng-container>
+    <ng-template #loggedIn>
+      <button
+        class="w-3/4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 transition"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+    </ng-template>
   </div>
 </header>

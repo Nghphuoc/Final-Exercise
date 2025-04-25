@@ -1,6 +1,6 @@
 
 <div class="p-6">
-  <h2 class="text-2xl font-semibold mb-4">Danh sách người dùng</h2>
+  <h2 class="text-2xl font-semibold mb-4">Data Users</h2>
 
   <div class="overflow-x-auto shadow-lg rounded-lg">
     <table class="min-w-full bg-white divide-y divide-gray-200">
@@ -12,25 +12,26 @@
           <th class="text-left py-3 px-4 font-semibold text-gray-700">Email</th>
           <th class="text-left py-3 px-4 font-semibold text-gray-700">Phone</th>
           <th class="text-left py-3 px-4 font-semibold text-gray-700">Role</th>
+          <th class="text-left py-3 px-4 font-semibold text-gray-700">Detail User</th>
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200">
         <tr *ngFor="let user of dataUser" class="hover:bg-gray-50 transition">
           <td class="py-3 px-4">{{ user.username }}</td>
           <!-- <td class="py-3 px-4">{{ user.password }}</td> -->
-          <td class="py-3 px-4">{{ user?.lastname }}</td>
-          <td class="py-3 px-4">{{ user?.email }}</td>
-          <td class="py-3 px-4">{{ user?.phoneNumber }}</td>
+          <td class="py-3 px-4">{{ user?.lastname }} </td>
+          <td class="py-3 px-4">{{ user?.email }} </td>
+          <td class="py-3 px-4">{{ user?.phoneNumber | phoneFormat }}</td>
           <td class="py-3 px-4">
             <span [ngClass]="{
               'text-green-600 font-bold': user.role?.roleName === 'ROLE_ADMIN',
               'text-blue-600': user.role?.roleName === 'ROLE_USER'
             }">
-            
               <div *ngIf="user.role?.roleName === 'ROLE_ADMIN'; else notLoggedIn">Admin</div>
               <ng-template #notLoggedIn>User</ng-template>
             </span>
           </td>
+          <td class="py-3 px-4"><button (click)="onClickDetailUser(user.username)" class="px-3.5 py-1.5 bg-green-400 text-white rounded-lg hover:bg-green-500">Detail</button></td>
         </tr>
       </tbody>
     </table>

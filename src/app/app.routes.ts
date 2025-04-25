@@ -1,3 +1,22 @@
 import { Routes } from '@angular/router';
+import { LoginComponentComponent } from './login-component/login-component.component';
+import { UserComponentComponent } from './user-component/user-component.component';
+import { AddUserComponentComponent } from './RegisterPage/add-user-component.component';
+import { AuthGuard } from './auth-guard/AuthGuard';
+import { UserDetailComponent } from './user-component/user-detail/user-detail.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+    {
+         path: 'login', component: LoginComponentComponent 
+    },
+    {
+        path: 'home', component: UserComponentComponent, canActivate: [AuthGuard] // Chỉ cho phép truy cập nếu đã đăng nhập
+    },
+    {
+        path: 'register', component: AddUserComponentComponent
+    },
+    {
+        path: 'userDetail/:username', component: UserDetailComponent
+    }
+    
+];

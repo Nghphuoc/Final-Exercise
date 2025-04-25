@@ -5,6 +5,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
 export class UserService {
 
   private baseUrl = 'http://localhost:8080';
@@ -21,7 +22,7 @@ export class UserService {
     );
   }
 
-  getUserById(username: string): Observable<any> {
+  getUserByName(username: string): Observable<any> {
     return this.httpClient.get<any>(`${this.baseUrl}/api/user/${username}`).pipe(
       catchError(this.handleError)
     );
@@ -35,14 +36,20 @@ export class UserService {
     );
   }
 
-  updateUser(user: any): Observable<any> {
-    return this.httpClient.put<any>(`${this.baseUrl}/api/user`, user).pipe(
+  updateUser(username: string, user : any): Observable<any> {
+    return this.httpClient.put<any>(`${this.baseUrl}/api/user/${username}`, user).pipe(
       catchError(this.handleError)
     );
   }
 
   deleteUser(username: string): Observable<any> {
     return this.httpClient.delete<any>(`${this.baseUrl}/api/user/${username}`).pipe(
+      catchError(this.handleError) // Xử lý lỗi
+    );
+  }
+
+  loginUser(user : any): Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}/api/auth/public/login`,user).pipe(
       catchError(this.handleError) // Xử lý lỗi
     );
   }

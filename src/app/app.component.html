@@ -1,8 +1,4 @@
 <app-navigate-component></app-navigate-component>
-<button class="px-4 py-3 bg-amber-400" (click)="openAddUserComponent()">open</button>
-<button class="px-4 py-3 bg-amber-400" (click)="closeAddUserComponent()">close</button>
-<app-user-component [dataUser]="dataUser"></app-user-component>
 
-<app-add-user-component [check]="openAddUser"></app-add-user-component>
+<router-outlet></router-outlet>
 
-<router-outlet />

@@ -37,7 +37,9 @@ export class UserService {
   }
 
   updateUser(username: string, user: any): Observable<any> {
-    return this.httpClient.put<any>(`${this.baseUrl}/api/user/${username}`, user).pipe(
+    return this.httpClient.put<any>(`${this.baseUrl}/api/user/${username}`, user,{
+      responseType: 'text' as 'json'// 👈 báo Angular không cần parse JSON
+    }).pipe(
       catchError(this.handleError)
     );
   }

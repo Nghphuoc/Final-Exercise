@@ -1,5 +1,5 @@
-<div
-  class="min-h-screen  flex items-center justify-center p-30"
+<div *ngIf="openEdit"
+  class="min-h-screen  flex items-center justify-center p-30 z-50"
 >
   <div
     class="backdrop-blur-md bg-gray-600 shadow-xl rounded-2xl p-10 max-w-lg w-full space-y-8 text-white"
@@ -8,7 +8,7 @@
       <h2
         class="text-4xl font-semibold text-white mb-6 animate__animated animate__fadeInUp"
       >
-        Register
+        Edit User
       </h2>
     </div>
 
@@ -27,10 +27,9 @@
           <input
             type="text"
             name="username"
-            id="username"
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
-            [(ngModel)]="username"
+            [(ngModel)]="user.username"
             placeholder="Nhập tên người dùng"
           />
         </div>
@@ -50,38 +49,13 @@
           <input
             type="text"
             name="lastname"
-            id="lastname"
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
-            [(ngModel)]="lastname"
+            [(ngModel)]="user.lastname"
             placeholder="Nhập họ và tên"
           />
         </div>
-      </div>
-
-      <!-- Mật khẩu -->
-      <div>
-        <label class="block mb-2 text-lg font-medium text-white"
-          >Password</label
-        >
-        <div
-          class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300"
-        >
-          <span class="material-icons text-white opacity-70 mr-3"
-            >password</span
-          >
-          <input
-            type="password"
-            name="password"
-            id="password"
-            class="bg-transparent w-full outline-none text-white placeholder-white/70"
-            required
-            [(ngModel)]="password"
-            placeholder="Nhập mật khẩu"
-          />
-        </div>
-      </div>
-
+      </div>      
       <!-- Email -->
       <div>
         <label class="block mb-2 text-lg font-medium text-white">Email</label>
@@ -92,10 +66,9 @@
           <input
             type="email"
             name="email"
-            id="email"
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
-            [(ngModel)]="email"
+            [(ngModel)]="user.email"
             placeholder="Nhập email của bạn"
           />
         </div>
@@ -113,10 +86,9 @@
           <input
             type="tel"
             name="phone"
-            id="phone"
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
-            [(ngModel)]="phone"
+            [(ngModel)]="user.phoneNumber"
             placeholder="Nhập số điện thoại"
           />
         </div>
@@ -129,7 +101,10 @@
           class="w-full py-3 px-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
            [disabled]="!userForm.form.valid"
         >
-          Register
+          Edit User
+        </button>
+        <button (click)="onCloseEdit()" class="w-full py-3 px-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95">
+          Close
         </button>
       </div>
     </form>

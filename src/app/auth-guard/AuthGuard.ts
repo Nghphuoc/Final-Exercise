@@ -9,7 +9,8 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     const isLoggedIn = !!sessionStorage.getItem('jwtToken');
-    if (isLoggedIn) {
+    const roles = sessionStorage.getItem('roles');
+    if (isLoggedIn && roles === 'ROLE_ADMIN') {
       return true;
     } else {
       this.router.navigate(['/login']); // chuyển hướng nếu chưa đăng nhập

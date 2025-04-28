@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../service/user.service';
 import {FormsModule} from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { ShareModule } from '../share/share.module';
 
 @Component({
   selector: 'app-login-component',
-  imports: [CommonModule,FormsModule,RouterModule],
-  templateUrl: './login-component.component.html'
+  imports: [CommonModule,FormsModule,ShareModule],
+  templateUrl: './login-component.component.html',
+  styleUrl: './login-component.css'
 })
 export class LoginComponentComponent {
 
@@ -26,7 +28,15 @@ export class LoginComponentComponent {
     this.userService.loginUser(user).subscribe({
       next: (res: any) => {alert('Đăng nhập thành công:' + res.jwtToken);
         sessionStorage.setItem('jwtToken', res.jwtToken);
-        this.router.navigate(['/home']);
+        sessionStorage.setItem('roles', res.roles);
+        if(res.roles == 'ROLE_ADMIN'){
+          this.router.navigate(['/dashboard']);
+        }else{
+          this.router.navigate(['/']);
+        }
+      },
+      error: (err: any) => {
+        alert('Đăng nhập thất bại:' + err.error.message);
       }
     });
   }

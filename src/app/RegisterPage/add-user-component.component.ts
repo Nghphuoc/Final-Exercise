@@ -8,6 +8,7 @@ import { UserService } from '../service/user.service';
   selector: 'app-add-user-component',
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './add-user-component.component.html',
+  styleUrl: './add-user-component.css'
 })
 export class AddUserComponentComponent {
   username = '';

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
@@ -50,11 +50,16 @@ export class UserService {
     );
   }
 
-  loginUser(user: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}/api/auth/public/login`, user).pipe(
-      catchError(this.handleError) // Xử lý lỗi
+  loginUser(user: any): Observable<HttpResponse<any>> {
+    return this.httpClient.post<any>(
+      `${this.baseUrl}/api/auth/public/login`,
+      user,
+      { observe: 'response' } // <-- lấy full response
+    ).pipe(
+      catchError(this.handleError)
     );
   }
+
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';

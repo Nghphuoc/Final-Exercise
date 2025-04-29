@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { LoginComponentComponent } from './login-component/login-component.component';
-import { UserComponentComponent } from './user-component/user-component.component';
 import { AddUserComponentComponent } from './RegisterPage/add-user-component.component';
 import { AuthGuard } from './auth-guard/AuthGuard';
 import { UserDetailComponent } from './user-component/user-detail/user-detail.component';
@@ -26,5 +25,4 @@ export const routes: Routes = [
     {
         path: 'userDetail/:username', component: UserDetailComponent
     }
-
 ];

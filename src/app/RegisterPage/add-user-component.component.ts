@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../service/user.service';
+import { UserService } from '../user-component/userService/user.service';
 
 @Component({
   selector: 'app-add-user-component',
@@ -20,22 +20,22 @@ export class AddUserComponentComponent {
 
   check!: boolean;
 
-  constructor(private userService : UserService) { }
+  constructor(private userService: UserService) { }
 
-  onSubmit(){
+  onSubmit() {
     const user = {
-    username: this.username,
-    lastname: this.lastname,
-    email: this.email,
-    password: this.password,
-    phone: this.phone,
-  };
+      username: this.username,
+      lastname: this.lastname,
+      email: this.email,
+      password: this.password,
+      phone: this.phone,
+    };
 
     this.userService.createUser(user).subscribe({
-    next: (res) => {
-      console.log('Tạo user thành công:', res);
-    }
-  });
-  
+      next: (res) => {
+        console.log('Tạo user thành công:', res);
+      }
+    });
+
   }
 }

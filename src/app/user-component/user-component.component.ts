@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../service/user.service';
+import { UserService } from './userService/user.service';
 import { Router } from '@angular/router';
 import { ShareModule } from '../share/share.module';
 @Component({
   selector: 'app-user-component',
-  imports: [ ShareModule],
+  imports: [ShareModule],
   templateUrl: './user-component.component.html',
 })
 export class UserComponentComponent implements OnInit {

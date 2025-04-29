@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../service/user.service';
-import {FormsModule} from '@angular/forms';
+import { UserService } from '../user-component/userService/user.service';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ShareModule } from '../share/share.module';
 import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-component',
-  imports: [CommonModule,FormsModule,ShareModule],
+  imports: [CommonModule, FormsModule, ShareModule],
   templateUrl: './login-component.component.html',
   styleUrl: './login-component.css'
 })
@@ -16,8 +16,8 @@ export class LoginComponentComponent {
 
   username = '';
   password = '';
-  
-  constructor(private userService : UserService, private router : Router) { }
+
+  constructor(private userService: UserService, private router: Router) { }
 
   onLogin() {
     const user = {

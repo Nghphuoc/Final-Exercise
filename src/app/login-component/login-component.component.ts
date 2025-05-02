@@ -44,7 +44,7 @@ export class LoginComponentComponent {
           if (res.roles.includes('ROLE_ADMIN')) {
             this.router.navigate(['/dashboard']);
           } else {
-            this.router.navigate(['landing-page']);
+            this.router.navigate(['/landing-page']);
           }
         } else {
           //this.failLogin();

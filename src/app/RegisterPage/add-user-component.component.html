@@ -1,6 +1,7 @@
 <div
   class="min-h-screen  flex items-center justify-center p-30"
 >
+  <p-toast></p-toast>
   <div
     class="backdrop-blur-md bg-gray-600 shadow-xl rounded-2xl p-10 max-w-lg w-full space-y-8 text-white"
   >
@@ -117,8 +118,14 @@
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
             [(ngModel)]="phone"
-            placeholder="Nhập số điện thoại"
+            placeholder="+84xxxxxxxxxx"
+            pattern="^\+84[0-9]{9}$"
+            #phoneInput="ngModel"
           />
+        </div>
+        <div *ngIf="phoneInput.invalid && (phoneInput.dirty || phoneInput.touched)" class="text-red-400 text-sm mt-1">
+          <div *ngIf="phoneInput.errors?.['required']">Phone number is required</div>
+          <div *ngIf="phoneInput.errors?.['pattern']">Phone number must start with +84 followed by 9 digits</div>
         </div>
       </div>
 

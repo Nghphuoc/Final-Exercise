@@ -9,21 +9,5 @@ import { UserService } from './user-component/userService/user.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-
   title = 'Final-Exercise';
-  openAddUser = false;
-  dataUser: any[] = [];
-
-  constructor(private userSevice: UserService) { }
-
-  openAddUserComponent() {
-    this.openAddUser = true;
-  }
-  closeAddUserComponent() {
-    this.openAddUser = false;
-  }
-
-  onClickClose(check: boolean) {
-    this.openAddUser = check;
-  }
 }

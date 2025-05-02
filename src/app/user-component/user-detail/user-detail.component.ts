@@ -3,22 +3,28 @@ import { ShareModule } from '../../share/share.module';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../userService/user.service';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [EditUserComponent, ShareModule],
-  templateUrl: './user-detail.component.html'
+  imports: [EditUserComponent, ShareModule, ToastModule],
+  templateUrl: './user-detail.component.html',
+  providers: [MessageService]
 })
 export class UserDetailComponent implements OnInit {
   user: any = null;
   isLoading: boolean = true;
   openEdit: boolean = false;
-
+  username : string = '';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private messageService : MessageService
   ) { }
 
   ngOnInit(): void {
@@ -28,9 +34,9 @@ export class UserDetailComponent implements OnInit {
   getUser() {
     this.isLoading = true;
     this.route.params.subscribe(params => {
-      const username = params['username'];
-      if (username) {
-        this.userService.getUserByName(username).subscribe({
+       this.username = params['username'];
+      if (this.username) {
+        this.userService.getUserByName(this.username).subscribe({
           next: (res: any) => {
             this.user = res;
             this.isLoading = false;
@@ -43,10 +49,37 @@ export class UserDetailComponent implements OnInit {
         });
       } else {
         this.isLoading = false;
-        // Handle case when no username is provided
         this.router.navigate(['/home']);
       }
     });
+  }
+
+  deleteUserByuserName(){
+    console.log(this.username);
+    this.userService.deleteUser(this.username).subscribe({
+      next: (res: HttpResponse<any>) =>{
+        if(res.status === 202){
+          console.log(res);
+          console.log(this.username);
+          this.successDelete();
+          this.router.navigate(['/home']);
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        const error = err.error.error;
+        const message = err.error.message;
+        this.failDelete(message, error);
+        console.error('Error deleting user:', err);
+      }
+    })
+  }
+
+  successDelete() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Delete success', life: 3000 });
+  }
+
+  failDelete(message : string, error : string) {
+    this.messageService.add({ severity: 'error', summary: message , detail: error, life: 3000 });
   }
 
   onOpenEdit() {
@@ -57,4 +90,12 @@ export class UserDetailComponent implements OnInit {
     this.openEdit = check;
     this.getUser();
   }
+
+  showToast(show : boolean){
+    if(show){
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Update success', life: 3000 });
+      show = false;
+    }
+  }
+
 }

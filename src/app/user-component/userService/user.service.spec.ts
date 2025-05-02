@@ -21,14 +21,14 @@ describe('UserService', () => {
     });
 
     it('should filter users with ROLE_USER', () => {
-        const mockUsers = [
+        const mockUsers = [ // fake data
             { username: 'user1', role: { roleName: 'ROLE_USER' } },
             { username: 'admin1', role: { roleName: 'ROLE_ADMIN' } },
         ];
 
         service.getAllUsers().subscribe(users => {
             expect(users.length).toBe(1);
-            expect(users[0].username).toBe('user1');
+            expect(users[0].username).toBe('user1'); // check phần tử đầu tiên có trùng khớp 0
         });
 
         const req = httpMock.expectOne('http://localhost:8080/api/user');
@@ -52,7 +52,7 @@ describe('UserService', () => {
         const mockUser = { username: 'newuser', password: '123' };
 
         service.createUser(mockUser).subscribe(res => {
-            expect(res).toBe('User created successfully');
+            expect(res.status).toBe(200);
         });
 
         const req = httpMock.expectOne('http://localhost:8080/api/auth/public/signup');
@@ -74,12 +74,12 @@ describe('UserService', () => {
 
     it('should delete a user', () => {
         service.deleteUser('john').subscribe(res => {
-            expect(res).toBe('User deleted');
+            expect(res.body.message).toBe("User deleted");
         });
 
         const req = httpMock.expectOne('http://localhost:8080/api/user/john');
         expect(req.request.method).toBe('DELETE');
-        req.flush('User deleted');
+        req.flush({ message: 'User deleted' });
     });
 
     it('should login a user and return full HttpResponse', () => {

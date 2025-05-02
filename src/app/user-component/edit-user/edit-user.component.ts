@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ShareModule } from '../../share/share.module';
 import { UserService } from '../userService/user.service';
 import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-edit-user',
   imports: [ReactiveFormsModule, ShareModule],
@@ -15,7 +16,7 @@ export class EditUserComponent implements OnInit {
   @Input({ required: true }) user: any;
   @Input({ required: true }) openEdit: boolean = false;
   @Output() closeEdit = new EventEmitter<boolean>();
-
+  @Output() showToast = new EventEmitter<boolean>();
   constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -40,6 +41,7 @@ export class EditUserComponent implements OnInit {
       next: (res: any) => {
         this.onCloseEdit();
         console.log(res);
+        this.showToast.emit(true);
       }
     });
   }

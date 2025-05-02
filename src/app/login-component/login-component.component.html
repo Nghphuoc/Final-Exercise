@@ -1,6 +1,8 @@
+
 <div
   class="min-h-screen flex items-center justify-center p-4"
 >
+  <p-toast></p-toast>
   <div
     class="backdrop-blur-md bg-gray-600 shadow-2xl rounded-2xl p-8 max-w-md w-full space-y-6 text-white"
   >
@@ -24,7 +26,13 @@
             placeholder="you@example.com"
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
+            minlength="5"
+            #usernameInput="ngModel"
           />
+        </div>
+        <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="text-red-400 text-sm mt-1">
+          <div *ngIf="usernameInput.errors?.['required']">Username is required</div>
+          <div *ngIf="usernameInput.errors?.['minlength']">Username must be at least 6 characters</div>
         </div>
       </div>
 
@@ -36,10 +44,16 @@
             [(ngModel)]="password"
             name="password"
             type="password"
-            placeholder="••••••••"
+            placeholder="Enter your password"
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
+            minlength="5"
+            #passwordInput="ngModel"
           />
+        </div>
+        <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-red-400 text-sm mt-1">
+          <div *ngIf="passwordInput.errors?.['required']">Password is required</div>
+          <div *ngIf="passwordInput.errors?.['minlength']">Password must be at least 6 characters</div>
         </div>
       </div>
 

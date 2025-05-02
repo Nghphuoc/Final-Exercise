@@ -4,6 +4,7 @@ import { AddUserComponentComponent } from './RegisterPage/add-user-component.com
 import { AuthGuard } from './auth-guard/AuthGuard';
 import { UserDetailComponent } from './user-component/user-detail/user-detail.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 export const routes: Routes = [
     {
@@ -24,5 +25,9 @@ export const routes: Routes = [
     },
     {
         path: 'userDetail/:username', component: UserDetailComponent
+    },
+    {
+        path: 'landing-page', component: LandingPageComponent
     }
+
 ];

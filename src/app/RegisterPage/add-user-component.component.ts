@@ -1,14 +1,18 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgForm, ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../user-component/userService/user.service';
-
+import { HttpResponse } from '@angular/common/http';
+import { MessageService } from 'primeng/api'
+import { ToastModule } from 'primeng/toast'
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-add-user-component',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, ToastModule],
   templateUrl: './add-user-component.component.html',
-  styleUrl: './add-user-component.css'
+  styleUrl: './add-user-component.css',
+  providers: [MessageService],
 })
 export class AddUserComponentComponent {
   username = '';
@@ -17,10 +21,9 @@ export class AddUserComponentComponent {
   password = '';
   phone = '';
   openAddUser = false;
-
   check!: boolean;
-
-  constructor(private userService: UserService) { }
+  @ViewChild('userForm') userForm!: NgForm;
+  constructor(private userService: UserService, private messageService : MessageService) { }
 
   onSubmit() {
     const user = {
@@ -32,10 +35,29 @@ export class AddUserComponentComponent {
     };
 
     this.userService.createUser(user).subscribe({
-      next: (res) => {
-        console.log('Tạo user thành công:', res);
+      next: (response: HttpResponse<any>) => {
+        if (response.status === 201) {
+          this.successRegister();
+        } else {
+          this.failRegister('Tạo user thất bại', 'Phản hồi không mong đợi từ máy chủ.');
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Full error:', err);
+        let message = err.error.error;
+        let detail = err.error.message;
+        this.failRegister(message, detail);
       }
-    });
 
+    });
+  }
+
+  successRegister(){
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register success', life: 3000 });
+    this.userForm.resetForm(); // reset the form
+  }
+
+  failRegister(message: string, error: string) {
+    this.messageService.add({ severity: 'error', summary: message, detail: error, life: 3000 });
   }
 }

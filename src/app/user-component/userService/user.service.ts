@@ -14,39 +14,50 @@ export class UserService {
 
   getAllUsers() {
     return this.httpClient.get<any[]>(this.baseUrl + "/api/user").pipe(
-      // map((response: any) => {
-      //   return response;
-      // }),
       map(data => data.filter(data => data.role?.roleName === 'ROLE_USER')),
-      catchError(this.handleError)
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err); //
+      })
     );
   }
 
   getUserByName(username: string): Observable<any> {
     return this.httpClient.get<any>(`${this.baseUrl}/api/user/${username}`).pipe(
-      catchError(this.handleError)
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err); //
+      })
     );
   }
 
-  createUser(user: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}/api/auth/public/signup`, user, {
-      responseType: 'text' as 'json'
-    }).pipe(
-      catchError(this.handleError)
+  createUser(user: any): Observable<HttpResponse<any>> {
+    return this.httpClient.post<any>(
+      `${this.baseUrl}/api/auth/public/signup`,
+      user,
+      { observe: 'response' }
+    ).pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err); //
+      })
     );
   }
 
   updateUser(username: string, user: any): Observable<any> {
     return this.httpClient.put<any>(`${this.baseUrl}/api/user/${username}`, user,{
-      responseType: 'text' as 'json'// 👈 báo Angular không cần parse JSON
+      responseType: 'text' as 'json'// báo Angular không cần parse JSON
     }).pipe(
-      catchError(this.handleError)
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err); //
+      })
     );
   }
 
-  deleteUser(username: string): Observable<any> {
-    return this.httpClient.delete<any>(`${this.baseUrl}/api/user/${username}`).pipe(
-      catchError(this.handleError) // Xử lý lỗi
+  deleteUser(username: string): Observable<HttpResponse<any>> {
+    return this.httpClient.delete<any>(`${this.baseUrl}/api/user/${username}`,
+      { observe: 'response' } )
+    .pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err); //
+      })
     );
   }
 
@@ -54,21 +65,11 @@ export class UserService {
     return this.httpClient.post<any>(
       `${this.baseUrl}/api/auth/public/login`,
       user,
-      { observe: 'response' } // <-- lấy full response
+      { observe: 'response' } 
     ).pipe(
-      catchError(this.handleError)
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err); //
+      })
     );
-  }
-
-
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred!';
-
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Client-side error: ${error.error.message}`;
-    } else {
-      errorMessage = `Server-side error: ${error.status} - ${error.message}`;
-    }
-    return throwError(errorMessage);
   }
 }

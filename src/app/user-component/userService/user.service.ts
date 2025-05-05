@@ -42,7 +42,7 @@ export class UserService {
   }
 
   updateUser(username: string, user: any): Observable<any> {
-    return this.httpClient.put<any>(`${this.baseUrl}/api/user/${username}`, user,{
+    return this.httpClient.put<any>(`${this.baseUrl}/api/user/${username}`, user, {
       responseType: 'text' as 'json'// báo Angular không cần parse JSON
     }).pipe(
       catchError((err: HttpErrorResponse) => {
@@ -53,22 +53,33 @@ export class UserService {
 
   deleteUser(username: string): Observable<HttpResponse<any>> {
     return this.httpClient.delete<any>(`${this.baseUrl}/api/user/${username}`,
-      { observe: 'response' } )
-    .pipe(
-      catchError((err: HttpErrorResponse) => {
-        return throwError(() => err); //
-      })
-    );
+      { observe: 'response' })
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          return throwError(() => err); //
+        })
+      );
   }
 
   loginUser(user: any): Observable<HttpResponse<any>> {
     return this.httpClient.post<any>(
       `${this.baseUrl}/api/auth/public/login`,
       user,
-      { observe: 'response' } 
+      { observe: 'response' }
     ).pipe(
       catchError((err: HttpErrorResponse) => {
         return throwError(() => err); //
+      })
+    );
+  }
+
+  forgotPassword(data : any): Observable<HttpResponse<any>> {
+    return this.httpClient.put<any>(
+      `${this.baseUrl}/api/auth/public/forgot-password`,data,
+      { observe: 'response' }
+    ).pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err);
       })
     );
   }

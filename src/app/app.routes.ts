@@ -2,32 +2,44 @@ import { Routes } from '@angular/router';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import { AddUserComponentComponent } from './RegisterPage/add-user-component.component';
 import { AuthGuard } from './auth-guard/AuthGuard';
-import { UserDetailComponent } from './user-component/user-detail/user-detail.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { AuthForUser } from './auth-guard/AuthForUser';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const routes: Routes = [
     {
-        path: '', redirectTo: 'dashboard', pathMatch: 'full'
+        path: '', redirectTo: 'login', pathMatch: 'full'
     },
     {
         path: 'login', component: LoginComponentComponent
+    },
+    {
+        path: 'forgot-password', component: ForgotPasswordComponent
+    },
+    {
+        path: 'register', component: AddUserComponentComponent
     },
     {
         path: 'dashboard', component: HomePageComponent, canActivate: [AuthGuard]
     },
     {
         path: 'home', loadComponent: () => import('./user-component/user-component.component')
-            .then(m => m.UserComponentComponent), canActivate: [AuthGuard] // Chỉ cho phép truy cập nếu đã đăng nhập
+            .then(m => m.UserComponentComponent), canActivate: [AuthGuard]
     },
     {
-        path: 'register', component: AddUserComponentComponent
+        path: 'userDetail/:username', loadComponent: () => import('./user-component/user-detail/user-detail.component')
+            .then(m => m.UserDetailComponent), canActivate: [AuthGuard]
     },
     {
-        path: 'userDetail/:username', component: UserDetailComponent
+        path: 'landing-page', component: LandingPageComponent, canActivate: [AuthForUser]
     },
     {
-        path: 'landing-page', component: LandingPageComponent
+        path: 'access-denied', component: AccessDeniedComponent
+    },
+    {
+        path: '**', redirectTo: 'access-denied'
     }
 
 ];

@@ -1,10 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 describe('UserService', () => {
     let service: UserService;
     let httpMock: HttpTestingController;
+
+    const mockData = {
+        username: 'kimjayoung',
+        email: 'kim@domain.com',
+        password: 'newSecurePassword123'
+      };
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -96,4 +103,38 @@ describe('UserService', () => {
         req.flush(mockResponse, { status: 202, statusText: 'OK' });
     
     });
+
+    it('should send PUT request and return success response', () => {
+        const mockResponse = new HttpResponse({
+          status: 202,
+          body: { message: 'Password changed successfully!' }
+        });
+    
+        service.forgotPassword(mockData).subscribe(response => {
+          expect(response.status).toBe(202);
+          expect(response.body?.message).toContain('Password changed');
+        });
+    
+        const req = httpMock.expectOne(`${service['baseUrl']}/api/auth/public/forgot-password`);
+        expect(req.request.method).toBe('PUT');
+        expect(req.request.body).toEqual(mockData);
+    
+        req.flush(mockResponse.body, { status: 202, statusText: 'Accepted' });
+      });
+    
+      it('should handle error response', () => {
+        const errorMsg = 'Invalid username or email!';
+        
+        service.forgotPassword(mockData).subscribe({
+          next: () => fail('should have failed with 400 error'),
+          error: (error: HttpErrorResponse) => {
+            expect(error.status).toBe(400);
+            expect(error.error.error).toContain('Invalid');
+          }
+        });
+    
+        const req = httpMock.expectOne(`${service['baseUrl']}/api/auth/public/forgot-password`);
+        req.flush({ error: 'Invalid username or email!' }, { status: 400, statusText: 'Bad Request' });
+      });
+    
 });

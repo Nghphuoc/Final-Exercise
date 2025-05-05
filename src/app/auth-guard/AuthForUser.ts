@@ -4,14 +4,14 @@ import { CanActivate, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthForUser implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
     const isLoggedIn = !!sessionStorage.getItem('jwtToken');
     const roles = sessionStorage.getItem('roles');
-    if (isLoggedIn) {
-      if(roles === 'ROLE_ADMIN'){
+    if (isLoggedIn ) {
+      if(roles === 'ROLE_USER'){
         return true;
       }else{
         this.router.navigate(['/access-denied']);

@@ -17,7 +17,7 @@ export class PhoneFormatPipe implements PipeTransform {
       const part2 = value.slice(3, 6);       
       const part3 = value.slice(6, 9);     
       const part4 = value.slice(9);        
-      return `(${part1}) ${part2}${part3}${part4}`;
+      return `(${part1})${part2}${part3}${part4}`;
     }
     return value;
   }

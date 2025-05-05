@@ -52,8 +52,12 @@ export class LoginComponentComponent {
       },
       error: (err: HttpErrorResponse) => {
         console.log("fukk",err);
-        const error = err.error.error;
-        const message = err.error.message;
+        let error = err.error?.error;
+        let message = err.error?.message;
+        if(error == null && message == null){
+          error = "Server Error";
+          message = "Cannot connect with server";
+        }
         this.failLogin(message, error);
       }
     });

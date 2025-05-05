@@ -1,4 +1,3 @@
-
 <div
   class="min-h-screen flex items-center justify-center p-4"
 >
@@ -54,6 +53,9 @@
         <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-red-400 text-sm mt-1">
           <div *ngIf="passwordInput.errors?.['required']">Password is required</div>
           <div *ngIf="passwordInput.errors?.['minlength']">Password must be at least 6 characters</div>
+        </div>
+        <div class="text-right mt-1">
+          <a routerLink="/forgot-password" class="text-sm text-indigo-300 hover:text-indigo-200">Forgot Password?</a>
         </div>
       </div>
 

@@ -1,7 +1,15 @@
-<div *ngIf="openEdit" class="fixed inset-0 bg-gray-100 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
-
-  <div class="bg-gray-600 shadow-xl rounded-2xl p-10 max-w-lg w-full space-y-8 text-white relative">
-    <button (click)="onCloseEdit()" class="absolute top-4 right-4 text-white hover:text-gray-300">
+<div
+  *ngIf="openEdit"
+  class="fixed inset-0 bg-gray-100 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50"
+>
+  <p-toast></p-toast>
+  <div
+    class="bg-gray-600 shadow-xl rounded-2xl p-10 max-w-lg w-full space-y-8 text-white relative"
+  >
+    <button
+      (click)="onCloseEdit()"
+      class="absolute top-4 right-4 text-white hover:text-gray-300"
+    >
       <span class="material-icons">❌</span>
     </button>
     <div class="text-center">
@@ -44,7 +52,7 @@
           class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300"
         >
           <span class="material-icons text-white opacity-70 mr-3"
-            >lastname</span
+            ></span
           >
           <input
             type="text"
@@ -55,14 +63,14 @@
             placeholder="Nhập họ và tên"
           />
         </div>
-      </div>      
+      </div>
       <!-- Email -->
       <div>
         <label class="block mb-2 text-lg font-medium text-white">Email</label>
         <div
           class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300"
         >
-          <span class="material-icons text-white opacity-70 mr-3">email</span>
+          <span class="material-icons text-white opacity-70 mr-3"></span>
           <input
             type="email"
             name="email"
@@ -99,7 +107,7 @@
         <button
           type="submit"
           class="w-full py-3 px-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
-           [disabled]="!userForm.form.valid"
+          [disabled]="!userForm.form.valid"
         >
           Edit User
         </button>

@@ -43,7 +43,7 @@ export class UserService {
 
   updateUser(username: string, user: any): Observable<any> {
     return this.httpClient.put<any>(`${this.baseUrl}/api/user/${username}`, user, {
-      responseType: 'text' as 'json'// báo Angular không cần parse JSON
+      observe: 'response' 
     }).pipe(
       catchError((err: HttpErrorResponse) => {
         return throwError(() => err); //

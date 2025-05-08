@@ -38,12 +38,12 @@
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
             [(ngModel)]="user.username"
-            placeholder="Nhập tên người dùng"
+            disabled 
           />
         </div>
       </div>
 
-      <!-- Họ và tên -->
+      <!-- lastname -->
       <div>
         <label class="block mb-2 text-lg font-medium text-white"
           >Last Name</label
@@ -60,28 +60,37 @@
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
             [(ngModel)]="user.lastname"
-            placeholder="Nhập họ và tên"
+            placeholder="Enter your lastname"
+            #lastnameInput="ngModel"
           />
         </div>
+        <div *ngIf="lastnameInput.invalid && (lastnameInput.dirty || lastnameInput.touched)" class="text-red-400 text-sm mt-1">
+          <div *ngIf="lastnameInput.errors?.['required']">Lastname is required</div>
+        </div>
       </div>
+
       <!-- Email -->
       <div>
         <label class="block mb-2 text-lg font-medium text-white">Email</label>
-        <div
-          class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300"
-        >
+        <div class="flex items-center bg-white/10 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-indigo-500 transition duration-300">
           <span class="material-icons text-white opacity-70 mr-3"></span>
           <input
             type="email"
             name="email"
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
             [(ngModel)]="user.email"
-            placeholder="Nhập email của bạn"
+            placeholder="Enter your email"
+            #emailInput="ngModel"
           />
         </div>
+        <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="text-red-400 text-sm mt-1">
+          <div *ngIf="emailInput.errors?.['required']">Email is required</div>
+          <div *ngIf="emailInput.errors?.['pattern']">Invalid email format</div>
+        </div>
       </div>
-
+      
       <!-- Số điện thoại -->
       <div>
         <label class="block mb-2 text-lg font-medium text-white"
@@ -97,8 +106,14 @@
             class="bg-transparent w-full outline-none text-white placeholder-white/70"
             required
             [(ngModel)]="user.phoneNumber"
-            placeholder="Nhập số điện thoại"
+            pattern="^0[0-9]{9}$"
+            #phoneInput="ngModel"
+            placeholder="Enter your phone"
           />
+        </div>
+        <div *ngIf="phoneInput.invalid && (phoneInput.dirty || phoneInput.touched)" class="text-red-400 text-sm mt-1">
+          <div *ngIf="phoneInput.errors?.['required']">Phone number is required</div>
+          <div *ngIf="phoneInput.errors?.['pattern']">Incorrect phone number format</div>
         </div>
       </div>
 

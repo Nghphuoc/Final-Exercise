@@ -11,6 +11,7 @@ import { UserService } from "../user-component/userService/user.service";
     templateUrl: './forgot-password.component.html',
     providers: [MessageService],
 })
+
 export class ForgotPasswordComponent {
     username: string = '';
     email: string = '';
@@ -40,6 +41,15 @@ export class ForgotPasswordComponent {
         return false;
     }
 
+    // truy cập bien (get) luon check khi truy cap
+    get passwordMismatch(): boolean {
+        return (
+            this.confirmPassword !== '' &&
+            this.password !== '' &&
+            this.confirmPassword !== this.password
+        );
+    }
+    
     verifyUser() {
         this.isVerifying = true;
         const data = {

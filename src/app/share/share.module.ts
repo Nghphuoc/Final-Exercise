@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PhoneFormatPipe } from './Pipe-custom/pipe-phone';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -10,8 +11,9 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     RouterModule,
     PhoneFormatPipe,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  exports: [PhoneFormatPipe,CommonModule,RouterModule,FormsModule]
+  exports: [PhoneFormatPipe,CommonModule,RouterModule,FormsModule,ReactiveFormsModule]
 })
 export class ShareModule { }

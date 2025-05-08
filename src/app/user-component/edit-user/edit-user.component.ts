@@ -20,6 +20,7 @@ export class EditUserComponent implements OnInit {
   @Input({ required: true }) openEdit: boolean = false;
   @Output() closeEdit = new EventEmitter<boolean>();
   @Output() showToast = new EventEmitter<boolean>();
+  
   constructor(private userService: UserService, private route: ActivatedRoute, private messageService : MessageService) { }
 
   ngOnInit(): void {
@@ -38,21 +39,21 @@ export class EditUserComponent implements OnInit {
       username: this.user.username,
       lastname: this.user.lastname,
       email: this.user.email,
-      phoneNumber: this.user.phoneNumber
+      phoneNumber: this.user.phoneNumber,
     }
     this.userService.updateUser(this.username, user).subscribe({
       next: (res: HttpResponse<any>) => {
         if(res.status === 202){
+          console.log(res);
           this.onCloseEdit();
-        console.log(res);
-        this.showToast.emit(true);
+          this.showToast.emit(true);
         }
       },
       error: (err: HttpErrorResponse) => {
+        console.error('Error update user:', err);
         const error = err.error.error;
         const message = err.error.message;
         this.failDelete(message, error);
-        console.error('Error deleting user:', err);
       }
     });
   }
@@ -60,4 +61,5 @@ export class EditUserComponent implements OnInit {
   failDelete(message : string, error : string) {
     this.messageService.add({ severity: 'error', summary: message , detail: error, life: 3000 });
   }
+  
 }

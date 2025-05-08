@@ -12,12 +12,10 @@ export class PhoneFormatPipe implements PipeTransform {
     value = value.replace(/(?!^\+)\D/g, '');
 
     // Kiểm tra nếu số bắt đầu bằng +84
-    if (value.startsWith('+84')) {
-      const part1 = value.slice(0, 3);      // +84
-      const part2 = value.slice(3, 6);       
-      const part3 = value.slice(6, 9);     
-      const part4 = value.slice(9);        
-      return `(${part1})${part2}${part3}${part4}`;
+    if (value.startsWith('0')) {
+      const part1 = '+84';
+      const part2 = value.slice(1, 10);               
+      return `(${part1})${part2}`;
     }
     return value;
   }

@@ -7,6 +7,7 @@ import { ShareModule } from '../share/share.module';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api'
 import { ToastModule } from 'primeng/toast';
+import { EmailServiceService } from '../email/email-service.service';
 @Component({
   selector: 'app-login-component',
   imports: [CommonModule, FormsModule, ShareModule, ToastModule],
@@ -22,7 +23,8 @@ export class LoginComponentComponent {
   constructor(
     private userService: UserService, 
     private router: Router, 
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+  ) { }
 
   onLogin() {
     const user = {

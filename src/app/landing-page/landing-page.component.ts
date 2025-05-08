@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShareModule } from '../share/share.module';
-import { UserService } from '../user-component/userService/user.service';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -11,6 +10,7 @@ import { Router, RouterModule } from '@angular/router';
     templateUrl: './landing-page.component.html',
     styleUrl: './landing-page.component.css'
 })
+
 export class LandingPageComponent implements OnInit {
 
     jwtToken = sessionStorage.getItem("jwtToken")
@@ -39,22 +39,12 @@ export class LandingPageComponent implements OnInit {
         }
     ];
 
-    constructor(private userService: UserService, private router : Router) { }
+    constructor(private router : Router) { }
 
     ngOnInit() {
         // Get username from session storage with default value
         const storedUsername = sessionStorage.getItem('username');
         this.username = storedUsername || 'User';
-
-        // Get total users count
-        this.userService.getAllUsers().subscribe({
-            next: (users: any[]) => {
-                this.totalUsers = users.length;
-            },
-            error: (err) => {
-                console.error('Error fetching users:', err);
-            }
-        });
 
         // Simulate active sessions (in a real app, this would come from your backend)
         this.activeSessions = Math.floor(Math.random() * 50) + 10;
@@ -62,12 +52,12 @@ export class LandingPageComponent implements OnInit {
 
     syncToken = () => {
         this.jwtToken = sessionStorage.getItem('jwtToken') || '';
-      };
+    };
     
-      logout() {
+    logout() {
         sessionStorage.removeItem('jwtToken');
         this.jwtToken = '';
         this.syncToken(); // cập nhật token
         this.router.navigate(['/login']);
-      }
+    }
 } 

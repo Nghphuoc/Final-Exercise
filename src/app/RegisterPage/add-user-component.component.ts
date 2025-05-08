@@ -7,6 +7,7 @@ import { HttpResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api'
 import { ToastModule } from 'primeng/toast'
 import { HttpErrorResponse } from '@angular/common/http';
+import { EmailServiceService } from '../email/email-service.service';
 @Component({
   selector: 'app-add-user-component',
   imports: [CommonModule, ReactiveFormsModule, FormsModule, ToastModule],
@@ -23,7 +24,10 @@ export class AddUserComponentComponent {
   openAddUser = false;
   check!: boolean;
   @ViewChild('userForm') userForm!: NgForm;
-  constructor(private userService: UserService, private messageService : MessageService) { }
+  constructor(
+    private userService: UserService,
+    private messageService: MessageService,
+  ) { }
 
   onSubmit() {
     const user = {
@@ -31,13 +35,17 @@ export class AddUserComponentComponent {
       lastname: this.lastname,
       email: this.email,
       password: this.password,
-      phone: this.phone,
+      phone: this.phone
     };
-
+    
+    console.log("user: ", user);
     this.userService.createUser(user).subscribe({
       next: (response: HttpResponse<any>) => {
+        console.log(response);
         if (response.status === 201) {
-          this.successRegister();
+          const detail = response.body.error;
+          const message = response.body.message;
+          this.successRegister(message, detail);
         } else {
           this.failRegister('Tạo user thất bại', 'Phản hồi không mong đợi từ máy chủ.');
         }
@@ -52,8 +60,8 @@ export class AddUserComponentComponent {
     });
   }
 
-  successRegister(){
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register success', life: 3000 });
+  successRegister(message: string, detail: string){
+    this.messageService.add({ severity: 'success', summary: message, detail: detail, life: 3000 });
     this.userForm.resetForm(); // reset the form
   }
 

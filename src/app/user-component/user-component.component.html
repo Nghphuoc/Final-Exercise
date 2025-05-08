@@ -2,10 +2,55 @@
   <div class="max-w-7xl mx-auto">
     <!-- Header Section -->
     <div class="bg-white p-6 rounded-2xl shadow-sm mb-8">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0 md:space-x-4"
+      >
         <div>
           <h2 class="text-2xl font-bold text-gray-800 mb-2">User Management</h2>
           <p class="text-gray-600">Manage and monitor your team members</p>
+        </div>
+
+        <!-- Username -->
+        <div class="relative">
+          <input
+            [(ngModel)]="username"
+            name="username"
+            type="text"
+            placeholder="Search username..."
+            class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+
+        <!-- Lastname -->
+        <div class="relative">
+          <input
+            [(ngModel)]="lastname"
+            name="lastname"
+            type="text"
+            placeholder="Search lastname..."
+            class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="relative">
+          <input
+            [(ngModel)]="email"
+            name="email"
+            type="text"
+            placeholder="Search email..."
+            class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+
+        <!-- Search Button -->
+        <div>
+          <button
+            class="text-gray-600 hover:text-gray-800"
+            (click)="searchDetail()"
+          >
+            <span class="text-xl">🔍</span>
+          </button>
         </div>
       </div>
     </div>
@@ -17,10 +62,12 @@
           <h3 class="text-lg font-semibold text-gray-800">User List</h3>
           <div class="flex items-center space-x-4">
             <div class="relative">
-              <input type="text" 
-                     placeholder="Search users..." 
-                     class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                     (input)="onChangeSearch($event)">
+              <input
+                type="text"
+                placeholder="Search users..."
+                class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                (input)="onChangeSearch($event)"
+              />
               <span class="absolute left-3 top-2.5 text-gray-400">🔍</span>
             </div>
             <button class="text-gray-600 hover:text-gray-800">
@@ -33,47 +80,91 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Username
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Last Name
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Email
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Phone
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Role
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-              <tr *ngFor="let user of getCurrentPageUsers()" class="hover:bg-gray-50 transition-colors duration-200">
+              <tr
+                *ngFor="let user of getCurrentPageUsers()"
+                class="hover:bg-gray-50 transition-colors duration-200"
+                [hidden]="user.status === 'DELETE'"
+              >
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
-                    <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">
-                      {{user.username.charAt(0).toUpperCase()}}
+                    <div
+                      class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold"
+                    >
+                      {{ user?.username.charAt(0).toUpperCase() }}
                     </div>
                     <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900">{{user.username}}</div>
+                      <div class="text-sm font-medium text-gray-900">
+                        {{ user?.username }}
+                      </div>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{user?.lastname}}</div>
+                  <div class="text-sm text-gray-900">{{ user?.lastname }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{user?.email}}</div>
+                  <div class="text-sm text-gray-900">{{ user?.email }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{user?.phoneNumber | phoneFormat}}</div>
+                  <div class="text-sm text-gray-900">
+                    {{ user?.phoneNumber | phoneFormat }}
+                  </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <span [ngClass]="{
-                    'px-3 py-1 rounded-full text-xs font-semibold': true,
-                    'bg-green-100 text-green-800': user.role?.roleName === 'ROLE_ADMIN',
-                    'bg-blue-100 text-blue-800': user.role?.roleName === 'ROLE_USER'
-                  }">
-                    {{user.role?.roleName === 'ROLE_ADMIN' ? 'Admin' : 'User'}}
+                  <span
+                    [ngClass]="{
+                      'px-3 py-1 rounded-full text-xs font-semibold': true,
+                      'bg-green-100 text-green-800':
+                        user.role?.roleName === 'ROLE_ADMIN',
+                      'bg-blue-100 text-blue-800':
+                        user.role?.roleName === 'ROLE_USER'
+                    }"
+                  >
+                    {{
+                      user.role?.roleName === "ROLE_ADMIN" ? "Admin" : "User"
+                    }}
                   </span>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <button (click)="onClickDetailUser(user.username)"
-                          class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-lg transition-colors duration-200">
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                >
+                  <button
+                    (click)="onClickDetailUser(user.username)"
+                    class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-lg transition-colors duration-200"
+                  >
                     View Details
                   </button>
                 </td>
@@ -84,49 +175,77 @@
 
         <!-- No Results Message -->
         <div *ngIf="filteredUsers.length === 0" class="text-center py-8">
-          <p class="text-gray-500">No users found matching your search criteria.</p>
+          <p class="text-gray-500">
+            No users found matching your search criteria.
+          </p>
         </div>
 
         <!-- Pagination -->
-        <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mt-4">
+        <div
+          class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mt-4"
+        >
           <!-- Mobile pagination -->
           <div class="flex flex-1 justify-between sm:hidden">
-            <button (click)="goToPreviousPage()"
-                    [disabled]="currentPage === 1"
-                    [ngClass]="{'opacity-50 cursor-not-allowed': currentPage === 1}"
-                    class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+            <button
+              (click)="goToPreviousPage()"
+              [disabled]="currentPage === 1"
+              [ngClass]="{ 'opacity-50 cursor-not-allowed': currentPage === 1 }"
+              class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               Previous
             </button>
-            <button (click)="goToNextPage()"
-                    [disabled]="currentPage === totalPages"
-                    [ngClass]="{'opacity-50 cursor-not-allowed': currentPage === totalPages}"
-                    class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+            <button
+              (click)="goToNextPage()"
+              [disabled]="currentPage === totalPages"
+              [ngClass]="{
+                'opacity-50 cursor-not-allowed': currentPage === totalPages
+              }"
+              class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               Next
             </button>
           </div>
           <!-- Desktop pagination -->
-          <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+          <div
+            class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between"
+          >
             <div>
               <p class="text-sm text-gray-700">
-                Showing <span class="font-medium">{{(currentPage - 1) * itemsPerPage + 1}}</span> to 
-                <span class="font-medium">{{Math.min(currentPage * itemsPerPage, filteredUsers.length)}}</span> of 
-                <span class="font-medium">{{filteredUsers.length}}</span> results
+                Showing
+                <span class="font-medium">{{
+                  (currentPage - 1) * itemsPerPage + 1
+                }}</span>
+                to
+                <span class="font-medium">{{
+                  Math.min(currentPage * itemsPerPage, filteredUsers.length)
+                }}</span>
+                of
+                <span class="font-medium">{{ filteredUsers.length }}</span>
+                results
               </p>
             </div>
             <div class="flex items-center space-x-2">
-              <button (click)="goToPreviousPage()"
-                      [disabled]="currentPage === 1"
-                      [ngClass]="{'opacity-50 cursor-not-allowed': currentPage === 1}"
-                      class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+              <button
+                (click)="goToPreviousPage()"
+                [disabled]="currentPage === 1"
+                [ngClass]="{
+                  'opacity-50 cursor-not-allowed': currentPage === 1
+                }"
+                class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Previous
               </button>
               <span class="text-sm text-gray-700">
-                Page {{currentPage}} of {{totalPages}}
+                Page {{ currentPage }} of {{ totalPages }}
               </span>
-              <button (click)="goToNextPage()"
-                      [disabled]="currentPage === totalPages"
-                      [ngClass]="{'opacity-50 cursor-not-allowed': currentPage === totalPages}"
-                      class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+              <button
+                (click)="goToNextPage()"
+                [disabled]="currentPage === totalPages"
+                [ngClass]="{
+                  'opacity-50 cursor-not-allowed': currentPage === totalPages
+                }"
+                class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Next
               </button>
             </div>

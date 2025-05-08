@@ -83,4 +83,16 @@ export class UserService {
       })
     );
   }
+
+  searchUser(data : any) : Observable<any[]>{
+    return this.httpClient.post<any[]>(
+      `${this.baseUrl}/api/user/search`, data
+    ).pipe(
+      map(data => data.filter(data => data.role?.roleName === 'ROLE_USER')),
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err);
+      })
+    );
+  }
+  
 }

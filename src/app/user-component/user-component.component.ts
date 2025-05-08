@@ -13,6 +13,11 @@ export class UserComponentComponent implements OnInit {
   filteredUsers: any[] = [];
   searchTerm: string = '';
 
+  // search data
+  username? : string = '';
+  lastname? : string = '';
+  email? : string = '';
+
   // Pagination properties
   currentPage: number = 1;
   itemsPerPage: number = 5;
@@ -27,14 +32,35 @@ export class UserComponentComponent implements OnInit {
 
   getAll() {
     this.userService.getAllUsers().subscribe({
-      next: (res: any[]) => {
+      next: (res : any[]) => {
         console.log('Lấy danh sách user thành công:', res);
         this.dataUser = res;
         this.filteredUsers = res; // Initialize filtered users with all users
         this.updatePagination();
       },
-      error: (err: any) => {
+      error: (err : any) => {
         console.error('Lỗi khi lấy danh sách user:', err);
+      }
+    });
+  }
+
+  searchDetail(){
+    const data = {
+      username: this.username,
+      lastname: this.lastname,
+      email: this.email
+    }
+    console.log("data: ",data)
+    this.userService.searchUser(data).subscribe({
+      next: (res : any[]) =>{
+        this.dataUser = res
+        this.filterUsers();
+        this.currentPage = 1; // Reset to first page when searching
+        this.updatePagination();
+        console.log("search data: ",res)
+      },
+      error : (err : any) => {
+        console.log(err)
       }
     });
   }

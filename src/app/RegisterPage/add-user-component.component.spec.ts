@@ -36,7 +36,7 @@ describe('AddUserComponentComponent', () => {
         component.username = 'testuser';
         component.password = '123456';
         component.email = 'test@gmail.com';
-        component.phone = '+84121212446';
+        component.phone = '0121212446';
         component.lastname = 'abv';
         component.onSubmit();
 

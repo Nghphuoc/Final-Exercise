@@ -7,10 +7,11 @@ import { HttpResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api'
 import { ToastModule } from 'primeng/toast'
 import { HttpErrorResponse } from '@angular/common/http';
-import { EmailServiceService } from '../email/email-service.service';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-add-user-component',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, ToastModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, ToastModule, RouterModule],
   templateUrl: './add-user-component.component.html',
   styleUrl: './add-user-component.css',
   providers: [MessageService],
@@ -23,6 +24,9 @@ export class AddUserComponentComponent {
   phone = '';
   openAddUser = false;
   check!: boolean;
+  isVerifying: boolean = false;
+  isVerified: boolean = false;
+
   @ViewChild('userForm') userForm!: NgForm;
   constructor(
     private userService: UserService,
@@ -30,6 +34,7 @@ export class AddUserComponentComponent {
   ) { }
 
   onSubmit() {
+    this.isVerifying = true;
     const user = {
       username: this.username,
       lastname: this.lastname,
@@ -43,6 +48,8 @@ export class AddUserComponentComponent {
       next: (response: HttpResponse<any>) => {
         console.log(response);
         if (response.status === 201) {
+          this.isVerifying = false;
+          this.isVerified = true;
           const detail = response.body.error;
           const message = response.body.message;
           this.successRegister(message, detail);
@@ -51,12 +58,12 @@ export class AddUserComponentComponent {
         }
       },
       error: (err: HttpErrorResponse) => {
+        this.isVerifying = false;
         console.error('Full error:', err);
         let message = err.error.error;
         let detail = err.error.message;
         this.failRegister(message, detail);
       }
-
     });
   }
 

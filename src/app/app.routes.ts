@@ -7,6 +7,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthForUser } from './auth-guard/AuthForUser';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SendEmailActiveComponent } from './send-email-active/send-email-active.component';
 
 export const routes: Routes = [
     {
@@ -39,7 +40,9 @@ export const routes: Routes = [
         path: 'access-denied', component: AccessDeniedComponent
     },
     {
+        path: 'send-email', component: SendEmailActiveComponent
+    },
+    {
         path: '**', redirectTo: 'access-denied'
     }
-
 ];

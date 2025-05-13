@@ -1,0 +1,102 @@
+<div class="min-h-screen flex items-center justify-center p-4">
+  <p-toast></p-toast>
+  <div
+    class="backdrop-blur-md bg-gray-600 shadow-2xl rounded-2xl p-8 max-w-md w-full space-y-6 text-white"
+  >
+    <div class="text-center">
+      <div class="text-4xl mb-2">📧</div>
+      <h2 class="text-2xl font-bold">Email Activation</h2>
+      <p class="text-sm opacity-90">
+        Enter your details to activate your account
+      </p>
+    </div>
+
+    <form [formGroup]="emailForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- Username Field -->
+      <div>
+        <label class="block mb-1 text-sm font-medium">Username</label>
+        <div class="flex items-center bg-white/10 rounded-lg px-3 py-2">
+          <input
+            type="text"
+            formControlName="username"
+            class="w-full bg-transparent border-none outline-none text-white"
+            placeholder="Enter username"
+          />
+        </div>
+        <div
+          *ngIf="f['username'].errors && submitted"
+          class="text-red-400 text-sm mt-1"
+        >
+          <div *ngIf="f['username'].errors['required']">
+            Username is required
+          </div>
+          <div *ngIf="f['username'].errors['minlength']">
+            Username must be at least 6 characters
+          </div>
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div>
+        <label class="block mb-1 text-sm font-medium">Email</label>
+        <div class="flex items-center bg-white/10 rounded-lg px-3 py-2">
+          <input
+            type="email"
+            formControlName="email"
+            class="w-full bg-transparent border-none outline-none text-white"
+            placeholder="Enter email"
+          />
+        </div>
+        <div
+          *ngIf="f['email'].errors && submitted"
+          class="text-red-400 text-sm mt-1"
+        >
+          <div *ngIf="f['email'].errors['required']">Email is required</div>
+          <div *ngIf="f['email'].errors['email']">
+            Please enter a valid email address
+          </div>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <label class="block mb-1 text-sm font-medium">Password</label>
+        <div class="flex items-center bg-white/10 rounded-lg px-3 py-2">
+          <input
+            type="password"
+            formControlName="password"
+            class="w-full bg-transparent border-none outline-none text-white"
+            placeholder="Enter password"
+          />
+        </div>
+        <div
+          *ngIf="f['password'].errors && submitted"
+          class="text-red-400 text-sm mt-1"
+        >
+          <div *ngIf="f['password'].errors['required']">
+            Password is required
+          </div>
+          <div *ngIf="f['password'].errors['minlength']">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center"
+      >
+        <span *ngIf="isVerifying" class="animate-spin mr-2">⌛</span>
+        {{ isVerifying ? "sending..." : "Send Activation Email" }}
+      </button>
+    </form>
+
+    <p class="text-sm text-center opacity-90">
+      Already have an account?
+      <a routerLink="/login" class="underline text-white hover:text-indigo-200"
+        >Back to Login</a
+      >
+    </p>
+  </div>
+</div>

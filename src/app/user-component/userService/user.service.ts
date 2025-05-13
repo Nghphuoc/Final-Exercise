@@ -94,5 +94,25 @@ export class UserService {
       })
     );
   }
+
+  enableStatus(username : string) : Observable<HttpResponse<any>> {
+    return this.httpClient.get<any>(`${this.baseUrl}/api/user/active/`+ username,
+      { observe: 'response' }
+    ).pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err);
+      })
+    );
+  }
+
+  sendMail(user : any) : Observable<HttpResponse<any>> {
+    return this.httpClient.post<any>(`${this.baseUrl}/api/auth/public/send-mail/active`,user,
+      { observe: 'response' }
+    ).pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err);
+      })
+    )
+  }
   
 }

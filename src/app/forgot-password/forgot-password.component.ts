@@ -57,12 +57,17 @@ export class ForgotPasswordComponent {
             email : this.email,
             password : this.password
         }
+        console.log("data: ",data);
         this.userService.forgotPassword(data).subscribe({
             next: (response) => {
                 this.isVerifying = false;
                 this.isVerified = true; 
+                const error = response.body.error;
+                const message = response.body.message;
+                console.log("response: ",response);
                 if(response.status === 202){
-                    this.toast("success","Resets password successfully!!!")
+                    
+                    this.toast(error,message);
                     this.userForm.resetForm(); // reset the form
                 }
             },
@@ -79,7 +84,7 @@ export class ForgotPasswordComponent {
     } 
 
     toast(status : string, message : string){
-        this.messageService.add({ severity: status, summary: status, detail: message });
+        this.messageService.add({ severity: "success", summary: status, detail: message });
     }
     
 }

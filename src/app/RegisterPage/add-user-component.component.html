@@ -158,9 +158,14 @@
           class="w-full py-3 px-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
            [disabled]="!userForm.form.valid"
         >
-          Register
+          
+          <span *ngIf="isVerifying" class="animate-spin mr-2">⌛</span>
+        {{ isVerifying ? "sending..." : "Register" }}
         </button>
       </div>
+      <p class="text-sm text-center opacity-90">
+        send email again  <a class="underline text-white hover:text-indigo-200" routerLink="/send-email" >Email</a>
+      </p>
     </form>
   </div>
 </div>

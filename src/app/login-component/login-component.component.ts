@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { booleanAttribute, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../user-component/userService/user.service';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,7 @@ import { ShareModule } from '../share/share.module';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api'
 import { ToastModule } from 'primeng/toast';
-import { EmailServiceService } from '../email/email-service.service';
+
 @Component({
   selector: 'app-login-component',
   imports: [CommonModule, FormsModule, ShareModule, ToastModule],
@@ -37,7 +37,7 @@ export class LoginComponentComponent {
         console.log(response);
         const status = response.status;
         const res = response.body;
-
+        
         if (status === 202 && res?.jwtToken) {
           sessionStorage.setItem('jwtToken', res.jwtToken);
           sessionStorage.setItem('roles', res.roles);
@@ -66,7 +66,7 @@ export class LoginComponentComponent {
   }
 
   successLogin() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Login success', life: 3000 });
+    this.messageService.add({ severity: 'success', summary: "success", detail: "Login success", life: 3000 });
   }
 
   failLogin(message : string, error : string) {

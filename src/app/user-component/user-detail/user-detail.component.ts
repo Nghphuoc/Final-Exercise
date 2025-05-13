@@ -58,10 +58,12 @@ export class UserDetailComponent implements OnInit {
     console.log(this.username);
     this.userService.deleteUser(this.username).subscribe({
       next: (res: HttpResponse<any>) =>{
+        console.log(res);
         if(res.status === 202){
           console.log(res);
-          console.log(this.username);
-          this.successDelete();
+          const message = res.body.error;
+          const status = res.body.message;
+          this.successDelete(message,status);
           this.router.navigate(['/home']);
         }
       },
@@ -74,8 +76,29 @@ export class UserDetailComponent implements OnInit {
     })
   }
 
-  successDelete() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Delete success', life: 3000 });
+  activeStatus(){
+    this.userService.enableStatus(this.username).subscribe({
+      next: (res: HttpResponse<any>) =>{
+        console.log(res)
+        if(res.status === 202){
+          const message = res.body.error;
+          const status = res.body.message;
+          this.successDelete(message,status);
+          this.router.navigate(['/home']);
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        const error = err.error.error;
+        const message = err.error.message;
+        this.failDelete(message, error);
+        console.error('Error deleting user:', err);
+      }
+    })
+  }
+
+  successDelete(message : string, error : string) {
+    this.messageService.add({ severity: 'success', summary: message , detail: error, life: 3000 });
+
   }
 
   failDelete(message : string, error : string) {

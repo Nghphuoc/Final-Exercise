@@ -116,7 +116,7 @@
               <tr
                 *ngFor="let user of getCurrentPageUsers()"
                 class="hover:bg-gray-50 transition-colors duration-200"
-                [hidden]="user.status === 'DELETE'"
+                [hidden]="user.status === ''"
               >
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">

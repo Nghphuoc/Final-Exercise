@@ -66,8 +66,7 @@ export class ForgotPasswordComponent {
                 const message = response.body.message;
                 console.log("response: ",response);
                 if(response.status === 202){
-                    
-                    this.toast(error,message);
+                    this.toast("success",error);
                     this.userForm.resetForm(); // reset the form
                 }
             },
@@ -84,7 +83,7 @@ export class ForgotPasswordComponent {
     } 
 
     toast(status : string, message : string){
-        this.messageService.add({ severity: "success", summary: status, detail: message });
+        this.messageService.add({ severity: status, summary: status, detail: message });
     }
     
 }

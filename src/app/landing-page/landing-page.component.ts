@@ -45,8 +45,6 @@ export class LandingPageComponent implements OnInit {
         // Get username from session storage with default value
         const storedUsername = sessionStorage.getItem('username');
         this.username = storedUsername || 'User';
-
-        // Simulate active sessions (in a real app, this would come from your backend)
         this.activeSessions = Math.floor(Math.random() * 50) + 10;
     }
 
